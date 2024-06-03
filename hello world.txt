@@ -1,0 +1,90 @@
+
+#include <HIDKeyboard.h>
+
+HIDKeyboard keyboard;
+
+void setup(){
+  keyboard.begin();
+  delay(2000);
+
+  keyboard.pressSpecialKey(GUI);
+  keyboard.releaseKey();
+  delay(500);
+
+  keyboard.println("windows powershell");
+  keyboard.pressSpecialKey(ENTER);
+  keyboard.releaseKey();
+  delay(1000);
+
+  keyboard.println("echo Hello World! > hello_world.txt");
+  keyboard.pressSpecialKey(ENTER);
+  keyboard.releaseKey();
+
+  keyboard.println("start hello_world.txt");
+  keyboard.pressSpecialKey(ENTER);
+  keyboard.releaseKey();
+}
+void loop(){
+
+}
+
+
+
+
+
+
+
+
+
+
+#include <HID-Project.h>
+#include <HID-Settings.h>
+
+// Utility function
+void typeKey(int key){
+  Keyboard.press(key);
+  delay(50);
+  Keyboard.release(key);
+}
+
+void setup()
+{
+  // Start Keyboard and Mouse
+  AbsoluteMouse.begin();
+  Keyboard.begin();
+
+  // Start Payload
+  delay(3000);
+
+  Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.press(114);
+  Keyboard.releaseAll();
+
+  delay(200);
+
+  Keyboard.print("cmd");
+
+  typeKey(KEY_ENTER);
+
+  delay(2000);
+
+  Keyboard.print("echo Hello World! > hello_world.txt");
+
+  typeKey(KEY_ENTER);
+
+  delay(2000);
+
+  Keyboard.print("start hello_world.txt");
+
+  typeKey(KEY_ENTER);
+
+
+  // End Payload
+
+  // Stop Keyboard and Mouse
+  Keyboard.end();
+  AbsoluteMouse.end();
+}
+
+// Unused
+void loop() {}
